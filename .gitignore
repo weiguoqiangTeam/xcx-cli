@@ -15,4 +15,7 @@ $RECYCLE.BIN/
 node_modules/
 project.private.config.json
 preview.jpg
-dist/
+#多有dist文件都不会提交
+# dist/ 
+#最外层dist文件不会提交
+/dist/*
