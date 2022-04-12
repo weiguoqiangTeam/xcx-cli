@@ -1,4 +1,4 @@
-# xcx-cli
+# xcx-cli 自动化框架
 
 ## .gitignore
 
