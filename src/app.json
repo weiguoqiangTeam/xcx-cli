@@ -1,23 +1,31 @@
 {
-	"pages": ["pages/index/index", "pages/logs/logs"],
-	"window": {
-		"backgroundTextStyle": "light",
-		"navigationBarBackgroundColor": "#fff",
-		"navigationBarTitleText": "Weixin",
-		"navigationBarTextStyle": "black"
-	},
-	"tabBar": {
-		"list": [
-			{
-				"pagePath": "pages/index/index",
-				"text": "首页"
-			},
-			{
-				"pagePath": "pages/logs/index",
-				"text": "日志"
-			}
-		]
-	},
-	"sitemapLocation": "sitemap.json",
-	"usingComponents": {}
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/my/my"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "xcx-cli",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabbar/index.png",
+        "selectedIconPath": "static/tabbar/indexActive.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "iconPath": "static/tabbar/my.png",
+        "selectedIconPath": "static/tabbar/myActive.png",
+        "text": "日志"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {}
 }

@@ -1,4 +1,5 @@
 // app.js
+const utils = require("./utils/util.js");
 const dayjs = require("dayjs");
 App({
 	onLaunch() {
@@ -7,6 +8,7 @@ App({
 		logs.unshift(Date.now());
 		wx.setStorageSync("logs", logs);
 		wx.$dayjs = dayjs;
+		wx.$utils = utils;
 		// 登录
 		wx.login({
 			success: (res) => {

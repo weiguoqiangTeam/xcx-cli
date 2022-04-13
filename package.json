@@ -13,6 +13,7 @@
 		"build-npm": "gulp npm",
 		"deploy-dev": "git push && npm run build-dev && NODE_ENV=development gulp upload",
 		"deploy-pro": "git push && npm run build-pro && NODE_ENV=production gulp upload",
+		"clearBranch": "git remote update origin --prune && gulp clearBranch",
 		"cp": "create-wxapp-page --type=page --dir=src/ --indent=2 --style=less",
 		"cc": "create-wxapp-page --type=component --dir=src/ --indent=2 --style=less"
 	},

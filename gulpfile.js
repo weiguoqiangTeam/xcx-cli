@@ -17,6 +17,7 @@ const px2rpx = require("gulp-px2rpx");
 const ci = require("miniprogram-ci");
 const sourcemaps = require("gulp-sourcemaps");
 const child_process = require("child_process");
+const dayjs = require("dayjs");
 
 const postcss = require("gulp-postcss");
 const autoprefixer = require("gulp-autoprefixer");
@@ -148,7 +149,8 @@ function scripts() {
 					replace("%ENV%", "production"),
 					replace("%ENV%", "development")
 				)
-			) // 环境变量静态替换
+			)
+			// 环境变量静态替换
 			.pipe(replace("%CDN_IMG%/", config.assetsCDN + config.cos.prefix + "/"))
 			.pipe(replace("%VERSION%", pkg.version))
 			.pipe(gulpif(config.enableUglify, uglify()))
@@ -282,8 +284,54 @@ async function preview() {
 	});
 	console.log("[previewResult:]", previewResult);
 }
+// 清理陈旧分支
+async function clearBranch() {
+	const brans = child_process
+		.execSync(
+			'for branch in `git branch -r | grep -v HEAD`;do echo `git show --format="%ci" $branch | head -n 1` $branch; done | sort -r'
+		)
+		.toString()
+		.split("\n");
+	// 获取当前所有分支
+	const branArr = brans
+		.map((item) => {
+			const arr = item.split(" ");
+			const d = `${arr[0]} ${arr[1]}`; //yyyy-MM-DD
+			log(
+				gutil.colors.red(`当前符合的分支有${d}====${arr[3] && arr[3].slice(7)}`)
+			);
+			return {
+				date: d,
+				timestamp: Date.parse(d),
+				branch: arr[3] && arr[3].slice(7),
+			};
+		})
+		.filter((item) => item.date && item.branch);
+	// 条件处理（默认超过3个月）
+	const filterBranch = (monthAgo = 3) => {
+		const time = Date.parse(dayjs().subtract(monthAgo, "month").toDate());
+		log(gutil.colors.red(`${time} delete fail`));
+		branArr.map((i) => {
+			log(gutil.colors.red(`branArr====${i.timestamp}`));
+		});
+		const branchs = branArr.filter((item) => item.timestamp <= time);
+		log(gutil.colors.red(`当前符合的分支有${branchs.length}个`));
+		return branchs;
+	};
+	// 执行
+	filterBranch(1).forEach((item) => {
+		log(gutil.colors.red(`${item.branch} delete fail`));
+		//   try {
+		//     child_process.execSync(`git push origin -d ${item.branch}`)
+		//   } catch (error) {
+		//     log(gutil.colors.red(`${item.branch} delete fail`))
+		//   }
+	});
+}
 exports.watch = watchFiles;
 exports.preview = preview;
+
+exports.clearBranch = clearBranch;
 // ci 自动构建npm
 exports.npm = npmBuild;
 exports.test = test;
