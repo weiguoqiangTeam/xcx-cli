@@ -1,10 +1,11 @@
 {
 	"description": "项目配置文件",
+	"miniprogramRoot": "dist/",
 	"packOptions": {
 		"ignore": [
 			{
-				"type": "file",
-				"value": ".eslintrc.js"
+				"type": "folder",
+				"value": "images"
 			}
 		]
 	},
@@ -40,8 +41,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.19.4",
-	"appid": "wx3020699dc50a9e98",
-	"projectname": "miniprogram-1",
+	"appid": "wxa520d36b0f8a5fd6",
+	"projectname": "xcx-cli",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
