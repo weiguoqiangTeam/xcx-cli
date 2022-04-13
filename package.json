@@ -1,7 +1,7 @@
 {
 	"name": "xcx-cli",
 	"version": "1.0.0",
-	"description": "xcx-cli",
+	"description": "测试Ci自动上传",
 	"main": ".eslintrc.js",
 	"scripts": {
 		"start": "rm -rf ./dist && npm install && cross-env NODE_ENV=development gulp",
