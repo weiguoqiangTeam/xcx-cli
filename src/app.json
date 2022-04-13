@@ -1,31 +1,29 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/my/my"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "xcx-cli",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "static/tabbar/index.png",
-        "selectedIconPath": "static/tabbar/indexActive.png",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/logs/logs",
-        "iconPath": "static/tabbar/my.png",
-        "selectedIconPath": "static/tabbar/myActive.png",
-        "text": "日志"
-      }
-    ]
-  },
-  "sitemapLocation": "sitemap.json",
-  "usingComponents": {}
+	"pages": ["pages/index/index", "pages/logs/logs"],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "xcx-cli",
+		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbar/index.png",
+				"selectedIconPath": "static/tabbar/indexActive.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/logs/logs",
+				"iconPath": "static/tabbar/logs.png",
+				"selectedIconPath": "static/tabbar/logsActive.png",
+				"text": "日志"
+			}
+		]
+	},
+	"sitemapLocation": "sitemap.json",
+	"usingComponents": {
+		"vant-icon": "@vant/weapp/icon/index"
+	}
 }

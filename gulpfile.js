@@ -296,10 +296,7 @@ async function clearBranch() {
 	const branArr = brans
 		.map((item) => {
 			const arr = item.split(" ");
-			const d = `${arr[0]} ${arr[1]}`; //yyyy-MM-DD
-			log(
-				gutil.colors.red(`当前符合的分支有${d}====${arr[3] && arr[3].slice(7)}`)
-			);
+			const d = `${arr[0]} ${arr[1]}`; //yyyy-MM-DD HH:mm:ss
 			return {
 				date: d,
 				timestamp: Date.parse(d),
@@ -309,23 +306,22 @@ async function clearBranch() {
 		.filter((item) => item.date && item.branch);
 	// 条件处理（默认超过3个月）
 	const filterBranch = (monthAgo = 3) => {
+		//dayjs().subtract返回克隆的Day.js对象，并减去指定的时间。
 		const time = Date.parse(dayjs().subtract(monthAgo, "month").toDate());
-		log(gutil.colors.red(`${time} delete fail`));
-		branArr.map((i) => {
-			log(gutil.colors.red(`branArr====${i.timestamp}`));
-		});
-		const branchs = branArr.filter((item) => item.timestamp <= time);
+		const branchList = ["master", "dev"];
+		const branchs = branArr.filter(
+			(item) => item.timestamp <= time && !branchList.includes(item.branch)
+		);
 		log(gutil.colors.red(`当前符合的分支有${branchs.length}个`));
 		return branchs;
 	};
 	// 执行
-	filterBranch(1).forEach((item) => {
-		log(gutil.colors.red(`${item.branch} delete fail`));
-		//   try {
-		//     child_process.execSync(`git push origin -d ${item.branch}`)
-		//   } catch (error) {
-		//     log(gutil.colors.red(`${item.branch} delete fail`))
-		//   }
+	filterBranch(2).forEach((item) => {
+		try {
+			child_process.execSync(`git push origin -d ${item.branch}`);
+		} catch (error) {
+			log(gutil.colors.red(`${item.branch} delete fail`));
+		}
 	});
 }
 exports.watch = watchFiles;
